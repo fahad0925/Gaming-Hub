@@ -1,103 +1,204 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useRef, useState, useEffect } from "react";
+import { data } from "./constants/data";
+import { SiGamejolt } from "react-icons/si";
+import Link from "next/link";
+import Particles from "./components/Particles";
+import { FaSearch } from "react-icons/fa";
+import { FaWindows, FaGlobe } from "react-icons/fa";
+
+type Deal = {
+  title: string;
+  thumbnail: string;
+  genre: string;
+  platform: string;
+};
+
+export default function Page() {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [filteredData, setFilteredData] = useState(data);
+  const [selectedGenre, setSelectedGenre] = useState("");
+  const [selectPlatForm, setSelectPlatForm] = useState("all");
+  const [orderBy, setOrderBy] = useState("relevance");
+  // ✅ Common Filter Function
+  const SearchAll = (
+    platform = selectPlatForm,
+    genre = selectedGenre,
+    order = orderBy,
+    query = inputRef.current?.value.toLowerCase().trim() || ""
+  ) => {
+    let filtered = data;
+    // for platform
+    if (platform !== "all" && platform !== "") {
+      filtered = filtered.filter((game) =>
+        game.platform.toLowerCase().includes(platform.toLowerCase())
+      );
+    }
+    // sidebar
+    if (genre) {
+      filtered = filtered.filter(
+        (game) => game.genre.toLowerCase() === genre.toLowerCase()
+      );
+    }
+    // search
+    if (query !== "") {
+      filtered = filtered.filter((game) =>
+        game.title.toLowerCase().includes(query)
+      );
+    }
+    // order
+    if (order === "id") {
+      filtered = [...filtered].sort((a, b) => a.id - b.id); // ID ascending
+    } else if (order === "name") {
+      filtered = [...filtered].sort((a, b) => a.title.localeCompare(b.title)); // Title A-Z
+    }
+
+    setFilteredData(filtered);
+  };
+
+  //  Search Input
+  const Search = () => {
+    SearchAll(selectPlatForm, selectedGenre);
+  };
+
+  //  Genre Click
+  const handleGenreClick = (genre: string) => {
+    setSelectedGenre(genre);
+    SearchAll(selectPlatForm, genre);
+  };
+
+  // Platform Select
+  const PlatFormOption = (platform: string) => {
+    setSelectPlatForm(platform);
+    SearchAll(platform, selectedGenre);
+  };
+
+  //  Unique Genres
+  const uniqueGenres = data.filter(
+    (item, index, self) =>
+      index === self.findIndex((t) => t.genre === item.genre)
+  );
+
+  useEffect(() => {
+    SearchAll();
+  }, [orderBy, selectPlatForm, selectedGenre]);
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+    <>
+      <Particles
+        particleColors={["#ffffff", " #ffffff", "#ffffff", "#ffffff"]}
+        particleCount={2000}
+        particleSpread={10}
+        speed={0.1}
+        particleBaseSize={100}
+        moveParticlesOnHover={true}
+        alphaParticles={true}
+        disableRotation={false}
+      />
+      <div className="min-h-screen bg-gradient-to-tr from-black-950 via-blue-950 to-black-950">
+        {/* Navbar */}
+        <div className="flex flex-col md:flex-row md:items-center py-3 px-4 border-b border-gray-700 fixed top-0 w-full z-50 bg-gradient-to-tr from-black-950 via-blue-950 to-black">
+          <div className="mb-2 md:mb-0">
+            <SiGamejolt className="w-10 h-10 text-purple-100" />
+          </div>
+          <div className="relative w-full md:w-auto flex-grow">
+            <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
+            <input
+              ref={inputRef}
+              onChange={Search}
+              type="text"
+              placeholder="Search Games..."
+              className="w-full p-2 pl-12 rounded-3xl border-2 border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-purple-800 hover:shadow-[0_0_15px_rgba(168,85,247,0.7)] transition"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        {/* col-6 Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-6 pt-24">
+          {/* Sidebar */}
+          <div className="hidden lg:block col-span-1 bg-gradient-to-tr from-gray-800 via-slate-900 to-black p-4 text-white border-r border-gray-700 sticky top-24 h-[calc(100vh-6rem)] overflow-auto">
+            <ul className="space-y-4 text-md">
+              <li
+                onClick={() => setSelectedGenre("")}
+                className="cursor-pointer hover:underline"
+              >
+                All Genres
+              </li>
+              {uniqueGenres.map((game, i) => (
+                <li
+                  key={i}
+                  onClick={() => setSelectedGenre(game.genre)}
+                  className="cursor-pointer hover:underline"
+                >
+                  {game.genre}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Main Content */}
+          <div className="col-span-1 lg:col-span-5 p-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center md:text-left mb-4 text-white line-clamp-2">
+              {selectedGenre
+                ? `${selectedGenre} Games (${filteredData.length})`
+                : `All Games (${filteredData.length})`}
+            </h1>
+
+            <div className="flex flex-col sm:flex-row sm:justify-end gap-2 mb-4">
+              <select
+                value={orderBy}
+                onChange={(e) => setOrderBy(e.target.value)}
+                className="p-1 sm:p-2 text-sm sm:text-base bg-[#1f1f1f] text-gray-200 rounded-lg border border-gray-600"
+              >
+                <option value="relevance">Relevance</option>
+                <option value="id">ID</option>
+                <option value="name">Name</option>
+              </select>
+              <select
+                value={selectPlatForm}
+                onChange={(e) => setSelectPlatForm(e.target.value)}
+                className="p-1 sm:p-2 text-sm sm:text-base bg-[#1f1f1f] text-gray-200 rounded-lg border border-gray-600"
+              >
+                <option value="all">All Platforms</option>
+                <option value="pc">PC</option>
+                <option value="web">Web</option>
+              </select>
+            </div>
+
+            {/* Cards */}
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              {filteredData.length === 0 ? (
+                <h2 className="text-white text-xl">No Game Found 😢</h2>
+              ) : (
+                filteredData.map((game, i) => (
+                  <Link key={i} href={`/${i}`}>
+                    <div className="bg-white/10 rounded-lg shadow-md backdrop-blur-md p-2 hover:scale-105 transform transition">
+                      <img
+                        src={game.thumbnail}
+                        alt={game.title}
+                        className="w-full h-40 md:h-60 object-cover rounded-md"
+                      />
+                      <div className="p-2">
+                        <h3 className="text-lg font-semibold text-white truncate">
+                          {game.title}
+                        </h3>
+                        <div className="flex justify-between items-center text-sm text-gray-300">
+                          <span>{game.genre}</span>
+                          {game.platform.toLowerCase().includes("pc") ? (
+                            <FaWindows />
+                          ) : (
+                            <FaGlobe />
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
