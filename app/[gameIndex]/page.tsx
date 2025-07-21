@@ -11,7 +11,7 @@ const Page = () => {
   return (
     <div className="max-w-7xl mx-auto text-white p-6 mt-10 space-y-8 lg:max-w-7xl lg:mx-auto lg:text-white lg:p-6 lg:mt-10 lg:space-y-8">
       {/* ✅ Title Centered */}
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center underline mb-10 sm:mb-14 md:mb-20 m-4 sm:m-6 md:m-6 lg:text-5xl lg:mb-20 lg:m-6">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center underline mb-10 sm:mb-14 md:mb-20 -mt-10 sm:mt-0 lg:mt-0 xl:mt-0 2xl:mt-0 md:mt-0 sm:m-6 md:m-6 lg:text-5xl lg:mb-20 lg:m-6">
         {game.title}
       </h1>
 
@@ -21,7 +21,7 @@ const Page = () => {
         <img
           src={game.thumbnail}
           alt={game.title}
-          className="w-full md:w-4xl   object-cover mb-6 md:mb-0 md:pr-10  rounded-xl sm:rounded-2xl md:rounded-4xl lg:md:w-3xl lg:object-cover lg:pr-10 lg:rounded-4xl"
+          className="w-full md:w-4xl   object-cover mb-6 md:mb-0 md:pr-10  rounded-xl sm:rounded-2xl md:rounded-4xl md:p-4 lg:md:w-xl lg:object-fill xl:w-3xl 2xl:w-3xl lg:pr-10 lg:rounded-4xl"
         />
 
         {/* ✅ Right Side Details */}

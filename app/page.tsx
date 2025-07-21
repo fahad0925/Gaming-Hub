@@ -118,7 +118,7 @@ export default function Page() {
         <div className="grid sm:grid-cols-1 md:grid-cols-12 pt-20 lg:grid-cols-1 lg:md:grid-cols-6 lg:pt-20">
           {/* Sidebar */}
           <div className="hidden md:block md:col-span-3  bg-gradient-to-tr from-gray-800 via-slate-900 to-black p-4 text-white border border-gray-700 sticky top-20 h-[calc(100vh-1rem)] overflow-auto lg:hidden lg:md:block lg:md:col-span-1 lg:bg-gradient-to-tr lg:from-gray-800 lg:via-slate-900 lg:to-black lg:p-4 lg:text-white lg:border lg:border-gray-700 lg:sticky lg:top-20 lg:h-[calc(100vh-1rem)] lg:overflow-auto ">
-            <ul className="space-y-6 text-md  lg:space-y-6 lg:text-md">
+            <ul className="space-y-5 text-md  lg:space-y-5 lg:text-md">
               <li
                 onClick={() => {
                   setSelectedGenre("");
@@ -134,7 +134,7 @@ export default function Page() {
                 <li
                   key={game.genre}
                   onClick={() => handleGenreClick(game.genre)}
-                  className="cursor-pointer hover:underline text-white flex lg:cursor-pointer lg:hover:underline lg:text-white lg:flex"
+                  className="cursor-pointer hover:underline text-white flex lg:cursor-pointer lg:hover:underline lg:text-white lg:flex items-center"
                 >
                   <img
                     src={game.thumbnail}
@@ -148,7 +148,7 @@ export default function Page() {
           </div>
 
           {/* Main Content */}
-          <div className="md:col-span-9  lg:w-full sm:  bg-gradient-to-tr from-blue-950 via-slate-900 to-black-950 border border-gray-700 lg:md:col-span-5 lg:bg-gradient-to-tr lg:from-blue-950 lg:via-slate-900 lg:to-black-950 lg:border lg:border-gray-700">
+          <div className="md:col-span-9  lg:w-full   bg-gradient-to-tr from-blue-950 via-slate-900 to-black-950 border border-gray-700 lg:md:col-span-5 lg:bg-gradient-to-tr lg:from-blue-950 lg:via-slate-900 lg:to-black-950 lg:border lg:border-gray-700">
             <div className=" lg:flex lg:justify-between lg:flex-row flex flex-col justify-center items-center">
               <div>
                 <h1 className="text-3xl font-bold pt-5 text-white lg:text-4xl  xl:text-5xl lg:font-bold lg:pl-10 lg:pt-5 lg:text-white ">
@@ -189,14 +189,14 @@ export default function Page() {
                   No Game Found 😢
                 </h2>
               ) : (
-                <div className="grid gap-4  sm:grid-cols-2 md:grid-cols-2  xl:grid-cols-4  lg:grid lg:gap-4 md:gap-4 lg:grid-cols-1  lg:sm:grid-cols-2 lg:md:grid-cols-3 lg:xl:grid-cols-4">
+                <div className="grid gap-4  sm:grid-cols-2 md:grid-cols-2  xl:grid-cols-4  lg:grid lg:gap-4 md:gap-4 xl:gap-3 2xl:gap-4 lg:grid-cols-4  lg:sm:grid-cols-2 lg:md:grid-cols-3 lg:xl:grid-cols-4">
                   {filteredData.map((game, i) => (
                     <Link key={i} href={`${i}`}>
-                      <div className="  bg-white/10 backdrop-blur-lg rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.6)] border border-white/20 text-white overflow-hidden transform transition-all duration-300 hover:scale-105 hover:border-purple-700 hover:shadow-[0_0_22px_rgba(168,85,247,0.7)] lg:bg-white/10 lg:backdrop-blur-lg lg:rounded-lg lg:shadow-[0_0_20px_rgba(0,0,0,0.6)] lg:border lg:border-white/20 lg:text-white lg:overflow-hidden lg:transform lg:transition-all lg:duration-300 lg:hover:scale-105 lg:hover:border-purple-700 lg:hover:shadow-[0_0_22px_rgba(168,85,247,0.7)]    sm:max-h-60 lg:max-h-62 xl:max-h-89">
+                      <div className="  bg-white/10 backdrop-blur-lg rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.6)] border border-white/20 text-white overflow-hidden transform transition-all duration-300 hover:scale-105 hover:border-purple-700 hover:shadow-[0_0_22px_rgba(168,85,247,0.7)] lg:bg-white/10 lg:backdrop-blur-lg lg:rounded-lg lg:shadow-[0_0_20px_rgba(0,0,0,0.6)] lg:border lg:border-white/20 lg:text-white lg:overflow-hidden lg:transform lg:transition-all lg:duration-300 lg:hover:scale-105 lg:hover:border-purple-700 lg:hover:shadow-[0_0_22px_rgba(168,85,247,0.7)]    sm:max-h-60  md:max-h-62 xl:max-h-60 2xl:max-h-80 [@media(min-width:1550px)_and_(max-width:1960px)]:max-h-64">
                         <img
                           src={game.thumbnail}
                           alt={game.title}
-                          className="w-full h-60  sm:h-40 sm:object-cover object-cover lg:h-42  lg:w-full xl:h-60 lg:object-cover xl:object-cover"
+                          className="w-full h-55  sm:h-40 sm:object-cover object-cover md:h-40  lg:w-full xl:h-40 2xl:h-60 lg:object-cover xl:object-cover [@media(min-width:1550px)_and_(max-width:1960px)]:h-45"
                         />
                         <div className="p-4 lg:p-4 sm:p-2">
                           <div className="flex items-center justify-between lg:flex lg:items-center lg:justify-between">
