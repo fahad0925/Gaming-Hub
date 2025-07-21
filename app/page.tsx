@@ -115,10 +115,10 @@ export default function Page() {
         </div>
 
         {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 pt-20 lg:grid lg:grid-cols-1 lg:md:grid-cols-6 lg:pt-20">
+        <div className="grid sm:grid-cols-1 md:grid-cols-12 pt-20 lg:grid-cols-1 lg:md:grid-cols-6 lg:pt-20">
           {/* Sidebar */}
-          <div className="hidden md:block md:col-span-3 bg-gradient-to-tr from-gray-800 via-slate-900 to-black p-4 text-white border border-gray-700 sticky top-20 h-[calc(100vh-6rem)] overflow-auto lg:hidden lg:md:block lg:md:col-span-1 lg:bg-gradient-to-tr lg:from-gray-800 lg:via-slate-900 lg:to-black lg:p-4 lg:text-white lg:border lg:border-gray-700 lg:sticky lg:top-20 lg:h-[calc(100vh-6rem)] lg:overflow-auto">
-            <ul className="space-y-9 text-md lg:space-y-9 lg:text-md">
+          <div className="hidden md:block md:col-span-3  bg-gradient-to-tr from-gray-800 via-slate-900 to-black p-4 text-white border border-gray-700 sticky top-20 h-[calc(100vh-1rem)] overflow-auto lg:hidden lg:md:block lg:md:col-span-1 lg:bg-gradient-to-tr lg:from-gray-800 lg:via-slate-900 lg:to-black lg:p-4 lg:text-white lg:border lg:border-gray-700 lg:sticky lg:top-20 lg:h-[calc(100vh-1rem)] lg:overflow-auto ">
+            <ul className="space-y-6 text-md  lg:space-y-6 lg:text-md">
               <li
                 onClick={() => {
                   setSelectedGenre("");
@@ -139,7 +139,7 @@ export default function Page() {
                   <img
                     src={game.thumbnail}
                     alt={game.title}
-                    className="w-9 h-9 rounded-xs mr-3 object-cover lg:w-9 lg:h-9 lg:rounded-xs lg:mr-3 lg:object-cover"
+                    className="w-9 h-9 rounded-xs mr-3   object-cover lg:w-9 lg:h-9 lg:rounded-xs lg:mr-3 lg:object-cover"
                   />
                   {game.genre}
                 </li>
@@ -148,7 +148,7 @@ export default function Page() {
           </div>
 
           {/* Main Content */}
-          <div className="md:col-span-9 w-fit lg:w-full bg-gradient-to-tr from-blue-950 via-slate-900 to-black-950 border border-gray-700 lg:md:col-span-5 lg:bg-gradient-to-tr lg:from-blue-950 lg:via-slate-900 lg:to-black-950 lg:border lg:border-gray-700">
+          <div className="md:col-span-9  lg:w-full sm:  bg-gradient-to-tr from-blue-950 via-slate-900 to-black-950 border border-gray-700 lg:md:col-span-5 lg:bg-gradient-to-tr lg:from-blue-950 lg:via-slate-900 lg:to-black-950 lg:border lg:border-gray-700">
             <div className=" lg:flex lg:justify-between lg:flex-row flex flex-col justify-center items-center">
               <div>
                 <h1 className="text-3xl font-bold pt-5 text-white lg:text-4xl  xl:text-5xl lg:font-bold lg:pl-10 lg:pt-5 lg:text-white ">
