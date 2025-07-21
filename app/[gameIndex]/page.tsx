@@ -1,13 +1,11 @@
+"use client";
 import React from "react";
 import { data } from "../constants/data";
+import { useParams } from "next/navigation";
 
-interface Props {
-  params: {
-    gameIndex: string;
-  };
-}
-
-const page = ({ params: { gameIndex } }: Props) => {
+const Page = () => {
+  const { gameIndex } = useParams();
+  console.log(gameIndex);
   let game = data[Number(gameIndex)];
   console.log(game);
   return (
@@ -67,4 +65,4 @@ const page = ({ params: { gameIndex } }: Props) => {
   );
 };
 
-export default page;
+export default Page;
