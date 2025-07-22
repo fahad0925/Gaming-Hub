@@ -98,7 +98,7 @@ export default function Page() {
       />
       <div style={{ width: "100%", height: "100%", position: "relative" }}>
         {/* Navbar */}
-        <div className="flex flex-row md:flex-row md:items-center py-1 pt-5 p-2  bg-gradient-to-tr from-black-950 via-blue-950 to-black border border-gray-700 fixed top-0 w-full z-50 gap-1 md:gap-0 h-20 lg:flex lg:py-3 lg:pl-3 lg:pr-5 lg:bg-gradient-to-tr lg:from-black-950 lg:via-blue-950 lg:to-black lg:border lg:border-gray-700 lg:fixed lg:top-0 lg:w-full lg:z-50 lg:gap-3 lg:md:gap-0 lg:h-20">
+        <div className="flex flex-row md:flex-row md:items-center py-1 pt-5 p-2  bg-gradient-to-tr from-black-950 via-blue-950 to-black border border-gray-900 fixed top-0 w-full z-50 gap-1 md:gap-0 h-20 lg:flex lg:py-3 lg:pl-3 lg:pr-5 lg:bg-gradient-to-tr lg:from-black-950 lg:via-blue-950 lg:to-black lg:border lg:border-gray-700 lg:fixed lg:top-0 lg:w-full lg:z-50 lg:gap-3 lg:md:gap-0 lg:h-20">
           <div className="mb-2 md:mb-0 lg:mb-2 lg:md:mb-0">
             <SiGamejolt className="w-10 h-10  text-purple-100 lg:w-10 lg:h-10 lg:mr-2 lg:text-purple-100" />
           </div>
@@ -203,7 +203,15 @@ export default function Page() {
                             <h3 className="text-lg sm:text-sm font-semibold truncate lg:text-lg lg:font-semibold lg:truncate">
                               {game.title}
                             </h3>
-                            <span className="text-sm  text-gray-500 bg-green-100 rounded-b-md py-1 px-2 lg:text-sm lg:text-gray-500 lg:bg-green-100 lg:rounded-b-md lg:py-1 lg:px-2">
+                            <span
+                              className={`text-sm    ${
+                                game.id > 400
+                                  ? "bg-green-950 text-green-300"
+                                  : game.id > 200
+                                  ? "bg-yellow-950 text-yellow-300"
+                                  : "bg-red-950 text-red-300"
+                              } rounded px-2 py-1`}
+                            >
                               {game.id}
                             </span>
                           </div>
